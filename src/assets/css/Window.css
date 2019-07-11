@@ -1,9 +1,10 @@
 html {
   -webkit-app-region: drag;
-  width: 200px;
-  height: 300px;
-  background: rgb(240, 240, 240);
+  width: 205px;
+  height: 305px;
+  background: rgb(60, 60, 60);
   font-family: Lato;
+  color: whitesmoke;
 }
 
 @font-face {

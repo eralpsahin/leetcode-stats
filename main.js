@@ -38,7 +38,7 @@ function createWindow() {
     resizable: false,
     maximizable: false,
     transparent: true,
-    hasShadow: false,
+    hasShadow: true,
     focusable: true
   });
   mainWindow.setAlwaysOnTop(true, 'floating', 1);
