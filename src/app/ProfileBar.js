@@ -43,7 +43,13 @@ class ProfileBar extends React.Component {
                 } // Red for wrong
               ]}
             />
-            <Typography variant="caption">75%</Typography>
+            <Typography variant="caption">
+              {(
+                (this.props.profile.correct /
+                  (this.props.profile.wrong + this.props.profile.correct)) *
+                100
+              ).toFixed(1)}
+            </Typography>
           </Box>
         </Tooltip>
       </Box>

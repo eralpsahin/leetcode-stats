@@ -32,7 +32,7 @@ const theme = createMuiTheme({
   },
   typography: {
     caption: {
-      fontSize: 8
+      fontSize: 10
     }
   },
   spacing: 8
