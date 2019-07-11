@@ -2,7 +2,15 @@ html {
   -webkit-app-region: drag;
   width: 200px;
   height: 300px;
-  background: rgb(30, 30, 30);
+  background: rgb(240, 240, 240);
+  font-family: Lato;
+}
+
+@font-face {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://stackedit.io/static/fonts/lato-normal.27bd77b.woff) format("woff")
 }
 
 body {
