@@ -1,0 +1,20 @@
+html {
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+  width: 200px;
+  height: 300px;
+  background: rgb(30, 30, 30);
+}
+
+body {
+  margin: 0px
+}
+
+image {
+  -webkit-app-region: no-drag;
+  pointer-events: none;
+}
+
+button {
+  -webkit-app-region: no-drag;
+}
