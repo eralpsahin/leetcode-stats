@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import App from './App';
+import App from './js/App';
 
 let iconLink = document.createElement('link');
 let robotoLink = document.createElement('link');
