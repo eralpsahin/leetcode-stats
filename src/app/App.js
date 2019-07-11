@@ -1,18 +1,14 @@
-import '../assets/css/App.css';
 import React from 'react';
 import Retrieve from './Retrieve';
-import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
-import RefreshIcon from '@material-ui/icons/Refresh';
-import IconButton from '@material-ui/core/IconButton';
-
+import ProfileBar from './ProfileBar';
+import RefreshButton from './RefreshButton';
 class Home extends React.Component {
   state = {
-    profile: {},
+    profile: {
+      correct: 0,
+      wrong: 1
+    },
     retrieving: true
   };
 
@@ -25,7 +21,6 @@ class Home extends React.Component {
     this.setState(() => {
       return { profile: res, retrieving: false };
     });
-    console.log(this.state);
   };
 
   handleRefresh = () => {
@@ -38,32 +33,18 @@ class Home extends React.Component {
   render() {
     return (
       <div style={{ width: '100%', height: '100%' }}>
-        <Box display="flex" flexDirection="row">
-          <Box bgcolor="transparent" p={0.5} flexDirection="row">
-            <Avatar alt="Profile Avatar" src={this.state.profile.avatar} />
-          </Box>
-          <Box mt={1.5}>
-            <Typography> {this.state.profile.realname}</Typography>
-          </Box>
-        </Box>
+        <ProfileBar profile={this.state.profile}></ProfileBar>
         <Box
           display="flex"
           flexWrap="wrap"
           alignContent="flex-end"
           justifyContent="flex-end"
-          css={{ maxWidth: 203, height: 255 }}
+          css={{ maxWidth: 205, height: 253 }}
         >
-          <IconButton
-            aria-label="Delete"
-            color="secondary"
-            size="small"
-            onClick={this.handleRefresh}
-          >
-            {this.state.retrieving && (
-              <CircularProgress size={15} color="secondary" />
-            )}
-            {!this.state.retrieving && <RefreshIcon fontSize="inherit" />}
-          </IconButton>
+          <RefreshButton
+            retrieving={this.state.retrieving}
+            handleRefresh={this.handleRefresh}
+          ></RefreshButton>
         </Box>
       </div>
     );

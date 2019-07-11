@@ -19,9 +19,24 @@ if (isDev) {
 Retrieve.get = async username => {
   const response = await instance.get(`leetcode.com/${username}`);
   const $ = cheerio.load(response.data);
+  let problemSet = $(
+    '.fa-question'
+  )[0].parent.children[1].childNodes[0].data.split('/');
+  let solved = +problemSet[0];
+  let total = +problemSet[1];
+
+  let solutionStats = $(
+    '.fa-cog'
+  )[0].parent.children[1].childNodes[0].data.split('/');
+  let correct = +solutionStats[0];
+  let wrong = +solutionStats[1] - correct;
   return {
     avatar: $('.img-rounded').attr('src'),
-    realname: $('.realname').attr('title')
+    realname: $('.realname').attr('title'),
+    solved,
+    total,
+    correct,
+    wrong
   };
 };
 

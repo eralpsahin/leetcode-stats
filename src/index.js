@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
+import './assets/css/App.css';
 import App from './app/App';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
@@ -16,16 +17,6 @@ robotoLink.rel = 'stylesheet';
 robotoLink.href =
   'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap';
 
-const lato = {
-  fontFamily: 'Lato',
-  fontStyle: 'normal',
-  fontWeight: 400,
-  src: `
-    url(https://stackedit.io/static/fonts/lato-normal.27bd77b.woff)
-    format("woff2")
-  `
-};
-
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -37,6 +28,11 @@ const theme = createMuiTheme({
       ligh: green[200],
       main: green[500],
       dark: green[900]
+    }
+  },
+  typography: {
+    caption: {
+      fontSize: 8
     }
   },
   spacing: 8

@@ -25,3 +25,13 @@ image {
 button {
   -webkit-app-region: no-drag;
 }
+
+span {
+  pointer-events: none;
+  user-select: none;
+}
+
+p {
+  pointer-events: none;
+  user-select: none;
+}
