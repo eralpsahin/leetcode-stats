@@ -3,8 +3,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import PieChart from 'react-minimal-pie-chart';
-import Tooltip from '@material-ui/core/Tooltip';
-import Zoom from '@material-ui/core/Zoom';
 import { shell } from 'electron';
 import ReactTooltip from 'react-tooltip';
 

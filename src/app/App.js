@@ -3,10 +3,10 @@ import Retrieve from './Retrieve';
 import Box from '@material-ui/core/Box';
 import ProfileBar from './ProfileBar';
 import RefreshButton from './RefreshButton';
+import ConfigurationDialog from './ConfigurationDialog';
 import Heatmap from './Heatmap';
 import ProblemButton from './ProblemButton';
 import ProblemTable from './ProblemTable';
-import Typography from 'material-ui/styles/typography';
 class Home extends React.Component {
   state = {
     retrieving: true,
@@ -17,23 +17,30 @@ class Home extends React.Component {
       total: 0,
       recent: []
     },
+    username: '',
     heatmap: null
   };
 
   componentDidMount() {
-    this.getProfile();
-    this.getHeatmap();
+    if (this.state.username === '') {
+      this.setState(() => {
+        return { retrieving: false };
+      });
+    } else {
+      this.getProfile();
+      this.getHeatmap();
+    }
   }
 
   getProfile = async () => {
-    let res = await Retrieve.getProfileInfo('eralp');
+    let res = await Retrieve.getProfileInfo(this.state.username);
     this.setState(() => {
       return { profile: res, retrieving: false };
     });
   };
 
   getHeatmap = async () => {
-    let res = await Retrieve.getHeatmap('eralp');
+    let res = await Retrieve.getHeatmap(this.state.username);
     this.setState(() => {
       return { heatmap: res, retrieving: false };
     });
@@ -45,6 +52,18 @@ class Home extends React.Component {
     });
     this.getHeatmap();
     this.getProfile();
+  };
+
+  handleConfiguration = username => {
+    this.setState(
+      () => {
+        return { username: username, retrieving: true };
+      },
+      () => {
+        this.getProfile();
+        this.getHeatmap();
+      }
+    );
   };
 
   render() {
@@ -70,6 +89,7 @@ class Home extends React.Component {
           mx="auto"
           css={{ maxWidth: 192.2, height: 132.53 }}
           style={{ marginTop: '-19px' }}
+          className="submissions"
         >
           <span style={{ fontSize: '13px' }}>Submissions:</span>
           <ProblemTable recent={this.state.profile.recent} />
@@ -85,10 +105,21 @@ class Home extends React.Component {
               : { maxWidth: 202, height: 46 }
           }
         >
-          <RefreshButton
-            retrieving={this.state.retrieving}
-            handleRefresh={this.handleRefresh}
-          ></RefreshButton>
+          <div style={{ width: '100%' }}>
+            <Box display="flex">
+              <Box flexGrow={1}>
+                <ConfigurationDialog
+                  save={this.handleConfiguration}
+                ></ConfigurationDialog>
+              </Box>
+              <Box>
+                <RefreshButton
+                  retrieving={this.state.retrieving}
+                  handleRefresh={this.handleRefresh}
+                ></RefreshButton>
+              </Box>
+            </Box>
+          </div>
         </Box>
       </div>
     );
