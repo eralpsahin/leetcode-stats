@@ -13,7 +13,7 @@ class Heatmap extends React.Component {
   render() {
     return (
       <>
-        <Box style={{ width: '80px' }} pr={0.8}>
+        <Box style={{ width: '80px' }}>
           <CalendarHeatmap
             startDate={new Date(Date.now() - Retrieve.PREV_LIMIT)}
             endDate={new Date(Date.now() + Retrieve.NEXT_LIMIT)}
@@ -40,19 +40,21 @@ class Heatmap extends React.Component {
             tooltipDataAttrs={value => {
               if (value.date === null) {
                 return {
-                  'data-tip': ''
+                  'data-tip': '',
+                  'data-for': 'heatmap-tooltip'
                 };
               }
               return {
                 'data-tip': `${
                   value.count
-                } submissions on</br> ${Retrieve.dateToString(value.date)}`
+                } submissions on</br> ${Retrieve.dateToString(value.date)}`,
+                'data-for': 'heatmap-tooltip'
               };
             }}
           />
         </Box>
         <ReactTooltip
-          className="minimal-tooltip"
+          id="heatmap-tooltip"
           getContent={value => {
             return value;
           }}

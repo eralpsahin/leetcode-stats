@@ -1,0 +1,26 @@
+.flex-container {
+  display: flex;
+  align-items: baseline;
+}
+
+.tooltip-title {
+  flex-grow: 1;
+}
+
+.tooltip-lang {
+  padding-left: 2px;
+  margin-left: 5px;
+}
+
+#heatmap-tooltip {
+  padding: 4px;
+}
+
+#problem-tooltip {
+  padding: 2px;
+  width: 150px;
+}
+
+#pie-tooltip {
+  padding: 4px;
+}

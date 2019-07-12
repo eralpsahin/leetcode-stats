@@ -3,7 +3,7 @@ import { Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { orange } from '@material-ui/core/colors';
 import Box from '@material-ui/core/Box';
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
+import ListIcon from '@material-ui/icons/PlaylistAddCheck';
 import { shell } from 'electron';
 
 const SmallButton = withStyles(theme => ({
@@ -18,24 +18,24 @@ const SmallButton = withStyles(theme => ({
   }
 }))(Button);
 
-class ProblemSet extends React.Component {
+class ProblemButton extends React.Component {
   constructor(props) {
     super(props);
   }
-  handleProblemSetClick = () => {
+  handleClick = () => {
     shell.openExternal('https://leetcode.com/problemset/all/');
   };
 
   render() {
     return (
-      <Box pl={0.5} pt={1}>
-        <SmallButton variant="contained" onClick={this.handleProblemSetClick}>
+      <Box>
+        <SmallButton variant="contained" onClick={this.handleClick}>
           {this.props.solved} / {this.props.total}
-          <ArrowDropUpIcon fontSize="small" />
+          <ListIcon style={{ fontSize: '20px', marginLeft: '2px' }} />
         </SmallButton>
       </Box>
     );
   }
 }
 
-export default ProblemSet;
+export default ProblemButton;

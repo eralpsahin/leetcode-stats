@@ -6,6 +6,8 @@ import PieChart from 'react-minimal-pie-chart';
 import Tooltip from '@material-ui/core/Tooltip';
 import Zoom from '@material-ui/core/Zoom';
 import { shell } from 'electron';
+import ReactTooltip from 'react-tooltip';
+
 class ProfileBar extends React.Component {
   constructor(props) {
     super(props);
@@ -29,36 +31,43 @@ class ProfileBar extends React.Component {
             <Typography> {this.props.profile.realname}</Typography>
           </Box>
         </Box>
-        <Tooltip
-          title={`${this.props.profile.correct} / ${this.props.profile.wrong +
-            this.props.profile.correct}`}
-          placement="left"
-          TransitionComponent={Zoom}
+        <Box
+          width={20}
+          p={0.5}
+          justifyContent="center"
+          data-tip={`Ratio: ${this.props.profile.correct} / ${this.props.profile
+            .wrong + this.props.profile.correct}`}
+          data-for="pie-tooltip"
         >
-          <Box width={20} p={0.5} justifyContent="center">
-            <PieChart
-              data={[
-                {
-                  value: this.props.profile.correct || 0,
-                  color: '#4caf50'
-                }, // Green for correct
-                {
-                  value: this.props.profile.wrong || 0,
-                  color: '#b71c1c'
-                } // Red for wrong
-              ]}
-            />
-            <Box ml={-0.5}>
-              <Typography variant="caption">
-                {(
-                  (this.props.profile.correct /
-                    (this.props.profile.wrong + this.props.profile.correct)) *
-                  100
-                ).toFixed(1) + '%'}
-              </Typography>
-            </Box>
+          <PieChart
+            data={[
+              {
+                value: this.props.profile.correct || 0,
+                color: '#4caf50'
+              }, // Green for correct
+              {
+                value: this.props.profile.wrong || 0,
+                color: '#b71c1c'
+              } // Red for wrong
+            ]}
+          />
+          <Box ml={-0.5}>
+            <Typography variant="caption">
+              {(
+                (this.props.profile.correct /
+                  (this.props.profile.wrong + this.props.profile.correct)) *
+                100
+              ).toFixed(1) + '%'}
+            </Typography>
           </Box>
-        </Tooltip>
+        </Box>
+        <ReactTooltip
+          id="pie-tooltip"
+          getContent={value => {
+            return value;
+          }}
+          place="left"
+        />
       </Box>
     );
   }
