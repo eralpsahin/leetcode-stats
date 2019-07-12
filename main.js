@@ -32,7 +32,8 @@ function createWindow() {
     height: 305,
     show: false,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      devTools: dev // disable devTools on production
     },
     frame: false,
     resizable: false,
@@ -69,7 +70,7 @@ function createWindow() {
 
     // Open the DevTools automatically if developing
     if (dev) {
-      mainWindow.webContents.openDevTools();
+      mainWindow.webContents.openDevTools({ mode: 'detach' });
     }
   });
 
