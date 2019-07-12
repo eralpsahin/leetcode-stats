@@ -68,8 +68,9 @@ Retrieve.getProfileInfo = async username => {
   let correct = +solutionStats[0];
   let wrong = +solutionStats[1] - correct;
 
-  let recent = $('.panel-title')[7]
-    .parent.parent.childNodes[3].childNodes.filter(submission => {
+  let panelIndex = $('.panel-title').length === 8 ? 7 : 8;
+  let recent = $('.panel-title')
+    [panelIndex].parent.parent.childNodes[3].childNodes.filter(submission => {
       return submission.type !== 'text';
     })
     .slice(0, 5);
