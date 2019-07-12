@@ -20,14 +20,14 @@ robotoLink.href =
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: orange[200],
+      light: orange[300],
       main: orange[500],
-      dark: orange[900]
+      dark: orange[700]
     },
     secondary: {
-      ligh: green[200],
+      ligh: green[300],
       main: green[500],
-      dark: green[900]
+      dark: green[700]
     }
   },
   typography: {

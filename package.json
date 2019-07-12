@@ -53,9 +53,11 @@
     "material-table": "^1.40.1",
     "material-ui": "^0.20.2",
     "react": "^16.8.6",
+    "react-calendar-heatmap": "^1.8.0",
     "react-dom": "^16.8.6",
     "react-minimal-pie-chart": "^4.2.0",
-    "react-router-dom": "^5.0.1"
+    "react-router-dom": "^5.0.1",
+    "react-tooltip": "^3.10.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
