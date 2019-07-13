@@ -14,6 +14,13 @@ class ProfileBar extends React.Component {
     shell.openExternal('https://leetcode.com/eralp');
   };
   render() {
+    let wrong = this.props.profile.wrong;
+    wrong = wrong === 0 ? 1 : wrong; // Prevent division by 0
+    const ratio =
+      (
+        (this.props.profile.correct / (wrong + this.props.profile.correct)) *
+        100
+      ).toFixed(1) + '%';
     return (
       <Box display="flex" flexDirection="row">
         <Box flexGrow={1} display="flex">
@@ -44,19 +51,13 @@ class ProfileBar extends React.Component {
                 color: '#4caf50'
               }, // Green for correct
               {
-                value: this.props.profile.wrong || 0,
+                value: wrong || 0,
                 color: '#b71c1c'
               } // Red for wrong
             ]}
           />
           <Box ml={-0.5}>
-            <Typography variant="caption">
-              {(
-                (this.props.profile.correct /
-                  (this.props.profile.wrong + this.props.profile.correct)) *
-                100
-              ).toFixed(1) + '%'}
-            </Typography>
+            <Typography variant="caption">{ratio}</Typography>
           </Box>
         </Box>
         <ReactTooltip

@@ -26,8 +26,12 @@ if (isDev) {
 function parseRecentSubmissions(recents) {
   let recentArray = [];
   recents.forEach(recent => {
-    let url = recent.attribs.href;
     let children = recent.childNodes;
+    if (children.length !== 9) {
+      // No recent submission panel
+      return;
+    }
+    let url = recent.attribs.href;
     let status =
       children[1].firstChild.data.trim().search('Accepted') === -1
         ? false
@@ -56,19 +60,22 @@ Retrieve.getProfileInfo = async username => {
 
   const $ = cheerio.load(response.data);
 
+  // Extract solved question stats
   let submissionRate = $(
     '.fa-question'
   )[0].parent.childNodes[1].childNodes[0].data.split('/');
   let solved = +submissionRate[0];
   let total = +submissionRate[1];
 
+  // Extract submission stats
   let solutionStats = $(
     '.fa-cog'
   )[0].parent.childNodes[1].childNodes[0].data.split('/');
   let correct = +solutionStats[0];
   let wrong = +solutionStats[1] - correct;
 
-  let panelIndex = $('.panel-title').length === 8 ? 7 : 8;
+  // Extract recent submissions
+  let panelIndex = $('.panel-title').length - 1;
   let recent = $('.panel-title')
     [panelIndex].parent.parent.childNodes[3].childNodes.filter(submission => {
       return submission.type !== 'text';
