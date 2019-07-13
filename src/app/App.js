@@ -91,7 +91,11 @@ class Home extends React.Component {
           style={{ marginTop: '-19px' }}
           className="submissions"
         >
-          <span style={{ fontSize: '13px' }}>Submissions:</span>
+          {this.state.profile.recent.length ? (
+            <span style={{ fontSize: '13px' }}>Submissions:</span>
+          ) : (
+            ''
+          )}
           <ProblemTable recent={this.state.profile.recent} />
         </Box>
         <Box
@@ -105,7 +109,7 @@ class Home extends React.Component {
               : { maxWidth: 202, height: 46 }
           }
         >
-          <div style={{ width: '100%' }}>
+          <Box width="100%">
             <Box display="flex">
               <Box flexGrow={1}>
                 <ConfigurationDialog
@@ -119,7 +123,7 @@ class Home extends React.Component {
                 ></RefreshButton>
               </Box>
             </Box>
-          </div>
+          </Box>
         </Box>
       </div>
     );
