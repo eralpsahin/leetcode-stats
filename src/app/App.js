@@ -7,7 +7,9 @@ import ConfigurationDialog from './ConfigurationDialog';
 import Heatmap from './Heatmap';
 import ProblemButton from './ProblemButton';
 import ProblemTable from './ProblemTable';
+import Store from './Store';
 class Home extends React.Component {
+  store = new Store();
   state = {
     retrieving: true,
     profile: {
@@ -17,7 +19,7 @@ class Home extends React.Component {
       total: 0,
       recent: []
     },
-    username: '',
+    username: this.store.get('username'),
     heatmap: null
   };
 
@@ -62,6 +64,7 @@ class Home extends React.Component {
       () => {
         this.getProfile();
         this.getHeatmap();
+        this.store.set('username', username);
       }
     );
   };

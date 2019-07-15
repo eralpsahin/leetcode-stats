@@ -65,14 +65,17 @@ class ConfigurationDialog extends React.Component {
             />
           </DialogContent>
           <DialogActions>
-            <IconButton
-              aria-label="Save"
-              color="primary"
-              size="small"
-              onClick={this.onSave}
-            >
-              <CheckIcon fontSize="inherit" />
-            </IconButton>
+            {this.state.username.length !== 0 && (
+              <IconButton
+                aria-label="Save"
+                color="primary"
+                size="small"
+                onClick={this.onSave}
+              >
+                <CheckIcon fontSize="inherit" />
+              </IconButton>
+            )}
+
             <IconButton
               aria-label="Close"
               color="primary"
