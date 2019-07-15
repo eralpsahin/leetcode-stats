@@ -68,14 +68,10 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div style={{ width: '100%', height: '100%' }}>
+      <Box width="100%" height="100%">
         <ProfileBar profile={this.state.profile}></ProfileBar>
-        <Box
-          display="flex"
-          flexDirection="row-reverse"
-          style={{ height: '90px' }}
-        >
-          <Box flexShrink={1} pr={0.8}>
+        <Box display="flex" flexDirection="row-reverse" height={90}>
+          <Box flexShrink={1} pr={0.8} mt={-2}>
             <Heatmap heatmap={this.state.heatmap || []} />
           </Box>
           <Box width="100%" pl={0.5} pt={1}>
@@ -88,7 +84,7 @@ class Home extends React.Component {
         <Box
           mx="auto"
           css={{ maxWidth: 192.2, height: 132.53 }}
-          style={{ marginTop: '-19px' }}
+          mt={-2.5}
           className="submissions"
         >
           {this.state.profile.recent.length ? (
@@ -114,6 +110,7 @@ class Home extends React.Component {
               <Box flexGrow={1}>
                 <ConfigurationDialog
                   save={this.handleConfiguration}
+                  username={this.state.username}
                 ></ConfigurationDialog>
               </Box>
               <Box>
@@ -125,7 +122,7 @@ class Home extends React.Component {
             </Box>
           </Box>
         </Box>
-      </div>
+      </Box>
     );
   }
 }

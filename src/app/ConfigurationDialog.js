@@ -50,7 +50,6 @@ class ConfigurationDialog extends React.Component {
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
-          style={{ background: 'black' }}
         >
           <DialogTitle id="form-dialog-title">Settings</DialogTitle>
           <DialogContent>
@@ -60,6 +59,7 @@ class ConfigurationDialog extends React.Component {
               id="name"
               label="Username"
               type="username"
+              defaultValue={this.props.username}
               fullWidth
               onChange={this.onChange}
             />

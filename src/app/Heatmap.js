@@ -13,7 +13,7 @@ class Heatmap extends React.Component {
   render() {
     return (
       <>
-        <Box style={{ width: '80px' }}>
+        <Box width={80}>
           <CalendarHeatmap
             startDate={new Date(Date.now() - Retrieve.PREV_LIMIT)}
             endDate={new Date(Date.now() + Retrieve.NEXT_LIMIT)}
