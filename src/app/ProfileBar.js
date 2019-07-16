@@ -11,7 +11,7 @@ class ProfileBar extends React.Component {
     super(props);
   }
   handleProfileClick = () => {
-    shell.openExternal('https://leetcode.com/eralp');
+    shell.openExternal(`https://leetcode.com/${this.props.username}`);
   };
   render() {
     let wrong = this.props.profile.wrong;

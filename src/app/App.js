@@ -72,7 +72,10 @@ class Home extends React.Component {
   render() {
     return (
       <Box width="100%" height="100%">
-        <ProfileBar profile={this.state.profile}></ProfileBar>
+        <ProfileBar
+          profile={this.state.profile}
+          username={this.state.username}
+        ></ProfileBar>
         <Box display="flex" flexDirection="row-reverse" height={90}>
           <Box flexShrink={1} pr={0.8} mt={-2}>
             <Heatmap heatmap={this.state.heatmap || []} />
