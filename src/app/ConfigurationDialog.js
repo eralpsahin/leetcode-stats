@@ -18,6 +18,7 @@ class ConfigurationDialog extends React.Component {
       username: ''
     };
   }
+
   handleClickOpen = () => {
     this.setState({ open: true });
   };
@@ -25,8 +26,15 @@ class ConfigurationDialog extends React.Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+
   onChange = event => {
     this.setState({ username: event.target.value });
+  };
+
+  onKeyPress = event => {
+    if (event.keyCode == 13 && this.enableSave) {
+      this.onSave();
+    }
   };
 
   onSave = () => {
@@ -35,6 +43,9 @@ class ConfigurationDialog extends React.Component {
   };
 
   render() {
+    this.enableSave =
+      this.state.username !== this.props.username &&
+      this.state.username.length !== 0;
     return (
       <>
         <IconButton
@@ -62,10 +73,11 @@ class ConfigurationDialog extends React.Component {
               defaultValue={this.props.username}
               fullWidth
               onChange={this.onChange}
+              onKeyUp={this.onKeyPress}
             />
           </DialogContent>
           <DialogActions>
-            {this.state.username.length !== 0 && (
+            {this.enableSave && (
               <IconButton
                 aria-label="Save"
                 color="primary"
