@@ -107,8 +107,8 @@ class Home extends React.Component {
           justifyContent="flex-end"
           css={
             !this.state.retrieving
-              ? { maxWidth: 205, height: 48 }
-              : { maxWidth: 202, height: 46 }
+              ? { maxWidth: 205, height: 52 }
+              : { maxWidth: 202, height: 52 }
           }
         >
           <Box width="100%">

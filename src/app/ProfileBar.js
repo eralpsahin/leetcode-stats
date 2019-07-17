@@ -45,6 +45,7 @@ class ProfileBar extends React.Component {
           data-for="pie-tooltip"
         >
           <PieChart
+            className="hover-scale"
             data={[
               {
                 value: this.props.profile.correct || 0,
