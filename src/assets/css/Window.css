@@ -11,8 +11,7 @@ html {
   font-family: Lato;
   font-style: normal;
   font-weight: 400;
-  src: url(https://stackedit.io/static/fonts/lato-normal.27bd77b.woff)
-    format('woff');
+  src: url(https://stackedit.io/static/fonts/lato-normal.27bd77b.woff) format('woff');
 }
 
 body {
