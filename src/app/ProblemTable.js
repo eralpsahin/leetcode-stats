@@ -1,13 +1,9 @@
 import React from 'react';
 import ProblemCell from './ProblemCell';
-class ProblemTable extends React.Component {
-  createTable = recents => {
-    let table = [];
 
-    // Outer loop to create parent
-    // for (let i = 0; i < recent; i++) {
-    //   table.push(<ProblemCell key={i} />);
-    // }
+export default function ProblemTable(props) {
+  const createTable = recents => {
+    let table = [];
 
     recents.forEach((recent, index) => {
       table.push(
@@ -24,9 +20,5 @@ class ProblemTable extends React.Component {
 
     return table;
   };
-
-  render() {
-    return <>{this.createTable(this.props.recent)}</>;
-  }
+  return <React.Fragment>{createTable(props.recent)}</React.Fragment>;
 }
-export default ProblemTable;

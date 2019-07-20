@@ -6,71 +6,65 @@ import PieChart from 'react-minimal-pie-chart';
 import { shell } from 'electron';
 import ReactTooltip from 'react-tooltip';
 
-class ProfileBar extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  handleProfileClick = () => {
-    shell.openExternal(`https://leetcode.com/${this.props.username}`);
+export default function ProfileBar(props) {
+  const handleProfileClick = () => {
+    shell.openExternal(`https://leetcode.com/${props.username}`);
   };
-  render() {
-    let wrong = this.props.profile.wrong;
-    wrong = wrong === 0 ? 1 : wrong; // Prevent division by 0
-    const ratio =
-      (
-        (this.props.profile.correct / (wrong + this.props.profile.correct)) *
-        100
-      ).toFixed(1) + '%';
-    return (
-      <Box display="flex" flexDirection="row">
-        <Box flexGrow={1} display="flex">
-          <Box
-            bgcolor="transparent"
-            p={0.5}
-            onClick={this.handleProfileClick}
-            style={{ cursor: 'pointer' }}
-          >
-            <Avatar alt="Profile Avatar" src={this.props.profile.avatar} />
-          </Box>
-          <Box mt={1.5}>
-            <Typography> {this.props.profile.realname}</Typography>
-          </Box>
-        </Box>
-        <Box
-          width={20}
-          p={0.5}
-          justifyContent="center"
-          data-tip={`Ratio: ${this.props.profile.correct} / ${this.props.profile
-            .wrong + this.props.profile.correct}`}
-          data-for="pie-tooltip"
-        >
-          <PieChart
-            className="hover-scale"
-            data={[
-              {
-                value: this.props.profile.correct || 0,
-                color: '#4caf50'
-              }, // Green for correct
-              {
-                value: wrong || 0,
-                color: '#b71c1c'
-              } // Red for wrong
-            ]}
-          />
-          <Box ml={-0.5}>
-            <Typography variant="caption">{ratio}</Typography>
-          </Box>
-        </Box>
-        <ReactTooltip
-          id="pie-tooltip"
-          getContent={value => {
-            return value;
-          }}
-          place="left"
-        />
-      </Box>
-    );
-  }
-}
 
-export default ProfileBar;
+  let wrong = props.profile.wrong;
+  wrong = wrong === 0 ? 1 : wrong; // Prevent division by 0
+  const ratio =
+    ((props.profile.correct / (wrong + props.profile.correct)) * 100).toFixed(
+      1
+    ) + '%';
+
+  return (
+    <Box display="flex" flexDirection="row">
+      <Box flexGrow={1} display="flex">
+        <Box
+          bgcolor="transparent"
+          p={0.5}
+          onClick={handleProfileClick}
+          style={{ cursor: 'pointer' }}
+        >
+          <Avatar alt="Profile Avatar" src={props.profile.avatar} />
+        </Box>
+        <Box mt={1.5}>
+          <Typography> {props.profile.realname}</Typography>
+        </Box>
+      </Box>
+      <Box
+        width={20}
+        p={0.5}
+        justifyContent="center"
+        data-tip={`Ratio: ${props.profile.correct} / ${props.profile.wrong +
+          props.profile.correct}`}
+        data-for="pie-tooltip"
+      >
+        <PieChart
+          className="hover-scale"
+          data={[
+            {
+              value: props.profile.correct || 0,
+              color: '#4caf50'
+            }, // Green for correct
+            {
+              value: wrong || 0,
+              color: '#b71c1c'
+            } // Red for wrong
+          ]}
+        />
+        <Box ml={-0.5}>
+          <Typography variant="caption">{ratio}</Typography>
+        </Box>
+      </Box>
+      <ReactTooltip
+        id="pie-tooltip"
+        getContent={value => {
+          return value;
+        }}
+        place="left"
+      />
+    </Box>
+  );
+}

@@ -1,7 +1,7 @@
 {
   "name": "leetcode-stats",
   "productName": "Stats for LeetCode",
-  "version": "1.6.0",
+  "version": "0.1.0",
   "description": "Electron app for keeping track of your LeetCode progress.",
   "license": "MIT",
   "private": false,
@@ -9,24 +9,23 @@
     "type": "git",
     "url": "https://github.com/alexdevero/electron-react-webpack-boilerplate.git"
   },
-  "homepage": "",
+  "homepage": "https://eralpsahin.com",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/eralpsahin/leetcode-stats/issues"
   },
   "author": {
     "name": "Eralp Sahin"
   },
   "keywords": [
-    "app",
-    "boilerplate",
+    "leetcode",
+    "stats",
+    "api",
     "electron",
-    "open",
-    "open-source",
-    "postcss",
-    "react",
-    "reactjs",
-    "source",
-    "webpack"
+    "programming",
+    "coding",
+    "grinding",
+    "interview",
+    "career"
   ],
   "engines": {
     "node": ">=9.0.0",

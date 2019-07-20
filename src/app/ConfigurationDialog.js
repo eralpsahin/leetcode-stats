@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import SettingsIcon from '@material-ui/icons/Settings';
 import CheckIcon from '@material-ui/icons/Check';
 import CrossIcon from '@material-ui/icons/Close';
@@ -10,97 +10,101 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-class ConfigurationDialog extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false,
-      username: ''
-    };
-  }
-
-  handleClickOpen = () => {
-    this.setState({ open: true });
+export default function ConfigurationDialog(props) {
+  const dialog = useDialog(false);
+  const handleSave = () => {
+    props.save(username.value);
+    dialog.setOpen(false);
   };
+  const username = useUsername(props.username, handleSave);
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
-  onChange = event => {
-    this.setState({ username: event.target.value });
-  };
-
-  onKeyPress = event => {
-    if (event.keyCode == 13 && this.enableSave) {
-      this.onSave();
-    }
-  };
-
-  onSave = () => {
-    this.props.save(this.state.username);
-    this.setState({ open: false });
-  };
-
-  render() {
-    this.enableSave =
-      this.state.username !== this.props.username &&
-      this.state.username.length !== 0;
-    return (
-      <>
-        <IconButton
-          aria-label="Delete"
-          color="secondary"
-          size="small"
-          onClick={this.handleClickOpen}
-        >
-          <SettingsIcon fontSize="inherit" />
-        </IconButton>
-        <Dialog
-          fullScreen
-          open={this.state.open}
-          onClose={this.handleClose}
-          aria-labelledby="form-dialog-title"
-        >
-          <DialogTitle id="form-dialog-title">Settings</DialogTitle>
-          <DialogContent>
-            <DialogContentText></DialogContentText>
-            <TextField
-              autoFocus
-              id="name"
-              label="Username"
-              type="username"
-              defaultValue={this.props.username}
-              fullWidth
-              onChange={this.onChange}
-              onKeyUp={this.onKeyPress}
-            />
-          </DialogContent>
-          <DialogActions>
-            {this.enableSave && (
-              <IconButton
-                aria-label="Save"
-                color="primary"
-                size="small"
-                onClick={this.onSave}
-              >
-                <CheckIcon fontSize="inherit" />
-              </IconButton>
-            )}
-
+  return (
+    <React.Fragment>
+      <IconButton
+        aria-label="Delete"
+        color="secondary"
+        size="small"
+        onClick={dialog.handleOpen}
+      >
+        <SettingsIcon fontSize="inherit" />
+      </IconButton>
+      <Dialog
+        fullScreen
+        open={dialog.open}
+        onClose={dialog.handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">Settings</DialogTitle>
+        <DialogContent>
+          <DialogContentText></DialogContentText>
+          <TextField
+            autoFocus
+            id="name"
+            label="Username"
+            type="username"
+            fullWidth
+            value={username.value}
+            onChange={username.onChange}
+            onKeyUp={username.onKeyUp}
+          />
+        </DialogContent>
+        <DialogActions>
+          {username.saveEnabled && (
             <IconButton
-              aria-label="Close"
+              aria-label="Save"
               color="primary"
               size="small"
-              onClick={this.handleClose}
+              onClick={handleSave}
             >
-              <CrossIcon fontSize="inherit" />
+              <CheckIcon fontSize="inherit" />
             </IconButton>
-          </DialogActions>
-        </Dialog>
-      </>
-    );
-  }
+          )}
+          <IconButton
+            aria-label="Close"
+            color="primary"
+            size="small"
+            onClick={dialog.handleClose}
+          >
+            <CrossIcon fontSize="inherit" />
+          </IconButton>
+        </DialogActions>
+      </Dialog>
+    </React.Fragment>
+  );
 }
 
-export default ConfigurationDialog;
+function useUsername(savedUsername, onEnterPress) {
+  const [value, setValue] = useState(savedUsername);
+  const [saveEnabled, setSaveEnabled] = useState(
+    value !== savedUsername && value.length !== 0
+  );
+  useEffect(() => {
+    setSaveEnabled(value !== savedUsername && value.length !== 0);
+  }, [value, setValue]);
+
+  const handleChange = e => setValue(e.target.value);
+  const handleKeyPress = e => {
+    if (e.keyCode == 13 && saveEnabled) {
+      setSaveEnabled(false);
+      onEnterPress();
+    }
+  };
+  return {
+    value,
+    onChange: handleChange,
+    onKeyUp: handleKeyPress,
+    saveEnabled
+  };
+}
+
+function useDialog(initialVal) {
+  const [open, setOpen] = useState(initialVal);
+  const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
+  return {
+    open,
+    handleClose,
+    handleOpen,
+    setOpen
+  };
+}
