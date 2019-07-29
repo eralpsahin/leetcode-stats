@@ -29,8 +29,8 @@ export default function ProfileBar(props) {
         >
           <Avatar alt="Profile Avatar" src={props.profile.avatar} />
         </Box>
-        <Box mt={1.5}>
-          <Typography> {props.profile.realname}</Typography>
+        <Box mt={1.5} maxWidth={110}>
+          <Typography noWrap={true}> {props.profile.realname}</Typography>
         </Box>
       </Box>
       <Box
